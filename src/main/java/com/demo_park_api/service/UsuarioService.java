@@ -6,11 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor // Injeção de depêndencia via lombok
 @Service
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    
     @Transactional
     public Usuario salvar(Usuario usuario){
         return usuarioRepository.save(usuario);
@@ -26,5 +29,10 @@ public class UsuarioService {
         Usuario user = buscarPorId(id);
         user.setPassword(novaSenha);
         return user;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Usuario> buscarTodos(){
+        return usuarioRepository.findAll();
     }
 }
