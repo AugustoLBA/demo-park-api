@@ -1,6 +1,7 @@
 package com.demo_park_api.controller;
 
 import com.demo_park_api.dto.UsuarioCreateDTO;
+import com.demo_park_api.dto.UsuarioResponseDTO;
 import com.demo_park_api.entity.Usuario;
 import com.demo_park_api.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
+    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
         Usuario user = usuarioService.salvar(usuarioService.toUsuario(usuarioCreateDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.toDto(user));
     }
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable Long id){
