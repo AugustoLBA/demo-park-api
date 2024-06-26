@@ -1,6 +1,7 @@
 package com.demo_park_api.service;
 
 import com.demo_park_api.dto.UsuarioCreateDTO;
+import com.demo_park_api.dto.UsuarioResponseDTO;
 import com.demo_park_api.entity.Usuario;
 import com.demo_park_api.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,5 +43,12 @@ public class UsuarioService {
         Usuario user = new Usuario();
         BeanUtils.copyProperties(dto, user);
         return user;
+    }
+
+    public UsuarioResponseDTO toDto(Usuario user){
+        UsuarioResponseDTO dto = new UsuarioResponseDTO();
+        BeanUtils.copyProperties(user, dto);
+        dto.setRole(user.getRole().name().substring("ROLE_".length()));
+        return dto;
     }
 }
