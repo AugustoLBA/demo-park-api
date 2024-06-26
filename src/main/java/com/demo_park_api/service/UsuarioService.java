@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor // Injeção de depêndencia via lombok
 @Service
@@ -57,5 +58,9 @@ public class UsuarioService {
         BeanUtils.copyProperties(user, dto);
         dto.setRole(user.getRole().name().substring("ROLE_".length()));
         return dto;
+    }
+
+    public List<UsuarioResponseDTO> toListDto(List<Usuario> users){
+        return users.stream().map(user -> toDto(user)).collect(Collectors.toList());
     }
 }
