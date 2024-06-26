@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor // Injeção de depêndencia via lombok
 @RestController
 @RequestMapping("api/v1/usuarios")
@@ -29,4 +31,10 @@ public class UsuarioController {
         Usuario user = usuarioService.editarSenha(id, usuario.getPassword());
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
+    @GetMapping
+    public ResponseEntity<List<Usuario>> findAll(){
+        List<Usuario> users = usuarioService.buscarTodos();
+        return ResponseEntity.status(HttpStatus.OK).body(users);
+    }
+
 }

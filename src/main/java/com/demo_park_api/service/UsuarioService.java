@@ -13,7 +13,7 @@ import java.util.List;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    
+
     @Transactional
     public Usuario salvar(Usuario usuario){
         return usuarioRepository.save(usuario);
