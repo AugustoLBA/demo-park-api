@@ -2,6 +2,7 @@ package com.demo_park_api.controller;
 
 import com.demo_park_api.dto.UsuarioCreateDTO;
 import com.demo_park_api.dto.UsuarioResponseDTO;
+import com.demo_park_api.dto.UsuarioSenhaDTO;
 import com.demo_park_api.entity.Usuario;
 import com.demo_park_api.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,9 @@ public class UsuarioController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Usuario> updatePassword(@PathVariable Long id,@RequestBody Usuario usuario){
-        Usuario user = usuarioService.editarSenha(id, usuario.getPassword());
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+    public ResponseEntity<UsuarioResponseDTO> updatePassword(@PathVariable Long id,@RequestBody UsuarioSenhaDTO dto){
+        Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getNovaSenha(), dto.getConfirmaSenha());
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.toDto(user));
     }
     @GetMapping
     public ResponseEntity<List<Usuario>> findAll(){
