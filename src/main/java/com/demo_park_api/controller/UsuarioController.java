@@ -35,8 +35,8 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
     @GetMapping
-    public ResponseEntity<List<Usuario>> findAll(){
-        List<Usuario> users = usuarioService.buscarTodos();
+    public ResponseEntity<List<UsuarioResponseDTO>> findAll(){
+        List<UsuarioResponseDTO> users = usuarioService.toListDto(usuarioService.buscarTodos());
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
