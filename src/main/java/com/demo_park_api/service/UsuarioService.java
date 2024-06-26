@@ -1,8 +1,10 @@
 package com.demo_park_api.service;
 
+import com.demo_park_api.dto.UsuarioCreateDTO;
 import com.demo_park_api.entity.Usuario;
 import com.demo_park_api.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,5 +36,11 @@ public class UsuarioService {
     @Transactional(readOnly = true)
     public List<Usuario> buscarTodos(){
         return usuarioRepository.findAll();
+    }
+
+    public Usuario toUsuario(UsuarioCreateDTO dto){
+        Usuario user = new Usuario();
+        BeanUtils.copyProperties(dto, user);
+        return user;
     }
 }
