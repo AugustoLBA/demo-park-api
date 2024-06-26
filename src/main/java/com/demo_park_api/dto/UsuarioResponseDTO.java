@@ -15,5 +15,5 @@ public class UsuarioResponseDTO {
 
     private String username;
 
-    private String password;
+    private String role;
 }
